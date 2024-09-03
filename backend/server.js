@@ -10,12 +10,13 @@ import connectToMongo from './db/connect_mongo.js';
 import authRoutes from './routes/auth.routes.js'
 import messageRoutes from './routes/message.routes.js'
 import userRoutes from './routes/user.routes.js'
+import { app, server } from './socket/socket.js';
 
 // --------------------------------------------------------------
 
 dotenv.config();
 
-const app = express();
+
 const PORT = process.env.PORT || 5000;
 
 const __dirname = path.resolve();
@@ -33,7 +34,7 @@ app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
 // --------------------------------------------------------------
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   connectToMongo();
   console.log(`Server running on port ${PORT}`)
 });
